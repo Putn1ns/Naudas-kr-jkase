@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pirkumu vēsture</title>
+    <style>
+        /* Vienkāršs stils, kas parasti saskan ar Flask mācību projektiem */
+        body { font-family: Arial, sans-serif; margin: 40px; line-height: 1.6; }
+        .container { max-width: 800px; margin: auto; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { border: 1px solid #ddd; padding: 12px; text-align: left; }
+        th { background-color: #f8f9fa; }
+        .ienakums { color: green; font-weight: bold; }
+        .izdevums { color: red; font-weight: bold; }
+        .back-link { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #007bff; }
+        .back-link:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="{{ url_for('sakums') }}" class="back-link">← Atpakaļ uz sākumu</a>
+        
+        <h1>Pirkumu vēsture</h1>
+        <p>Lietotājs: <strong>{{ session['lietotajs'] }}</strong></p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Datums</th>
+                    <th>Veids</th>
+                    <th>Iemesls</th>
+                    <th>Summa</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for d in darijumi %}
+                <tr>
+                    <td>{{ d['datums'] }}</td>
+                    <td>
+                        {% if d['veids'] == 'ienakums' %} Ienākums {% else %} Izdevums {% endif %}
+                    </td>
+                    <td>{{ d['iemesls'] }}</td>
+                    <td class="{{ d['veids'] }}">
+                        {% if d['veids'] == 'ienakums' %}+{% else %}-{% endif %} {{ d['summa'] }} €
+                    </td>
+                </tr>
+                {% else %}
+                <tr>
+                    <td colspan="4" style="text-align: center;">Vēsture ir tukša.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

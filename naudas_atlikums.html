@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="lv">
+<head>
+    <meta charset="UTF-8">
+    <title>Naudas Atlikums</title>
+    <style>
+        .container { font-family: Arial, sans-serif; max-width: 400px; margin: 20px auto; padding: 20px; border: 1px solid #ccc; border-radius: 8px; }
+        .pozitivs { color: green; font-weight: bold; }
+        .negativs { color: red; font-weight: bold; }
+        .rinda { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        hr { border: 0; border-top: 1px solid #eee; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Finanšu pārskats</h2>
+        <div class="rinda">
+            <span>Kopējie ienākumi:</span>
+            <span class="pozitivs">+ {{ ienakumi }} €</span>
+        </div>
+        <div class="rinda">
+            <span>Kopējie izdevumi:</span>
+            <span class="negativs">- {{ izdevumi }} €</span>
+        </div>
+        <hr>
+        <div class="rinda">
+            <strong>Pašreizējais atlikums:</strong>
+            <strong class="{{ 'pozitivs' if bilance >= 0 else 'negativs' }}">
+                {{ bilance }} €
+            </strong>
+        </div>
+        <br>
+        <a href="{{ url_for('sakums') }}">Atpakaļ uz sākumu</a>
+    </div>
+</body>
+</html>

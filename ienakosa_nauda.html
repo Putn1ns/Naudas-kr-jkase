@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Pievienot ienākumus</h2>
+
+<form method="POST">
+    <p>
+        Summa (€):<br>
+        <input type="number" step="0.01" name="summa" required>
+    </p>
+    <p>
+        No kurienes saņemts?:<br>
+        <input type="text" name="avots" required>
+    </p>
+    <button type="submit" style="background-color: #10b981; color: white; border: none; padding: 5px 15px;">Pievienot</button>
+</form>
+
+<br>
+<h3>Tavu ienākumu saraksts</h3>
+<table class="table">
+    <tr>
+        <th>Summa</th>
+        <th>Avots</th>
+    </tr>
+    {% for ienakums in ienakumi %}
+    <tr>
+        <td style="color: #10b981; font-weight: bold;">+ {{ ienakums['summa'] }} €</td>
+        <td>{{ ienakums['iemesls'] }}</td>
+    </tr>
+    {% else %}
+    <tr>
+        <td colspan="2">Saraksts ir tukšs.</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}
